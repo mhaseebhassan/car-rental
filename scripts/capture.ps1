@@ -1,8 +1,8 @@
-$serverProcess = Start-Process -FilePath "node" -ArgumentList @("scripts/server.mjs") -WorkingDirectory "C:\Users\muham\OneDrive\Desktop\dubai-car-rental" -PassThru
+$serverProcess = Start-Process -FilePath "node" -ArgumentList @("scripts/server.mjs") -PassThru
 Start-Sleep -Seconds 3
 
 $chrome = "C:\Program Files\Google\Chrome\Application\chrome.exe"
-$outDir = "C:\Users\muham\OneDrive\Desktop\dubai-car-rental\screenshots"
+$outDir = Join-Path $PSScriptRoot "..\screenshots"
 
 if (-not (Test-Path $outDir)) {
     New-Item -ItemType Directory -Path $outDir | Out-Null
