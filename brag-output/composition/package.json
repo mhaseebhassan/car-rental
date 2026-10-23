@@ -1,0 +1,10 @@
+{
+  "name": "apex-drive-dubai-brag",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "preview": "hyperframes preview",
+    "check": "hyperframes check",
+    "render": "hyperframes render"
+  }
+}

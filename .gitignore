@@ -20,6 +20,9 @@
 # production
 /build
 
+# hyperframes
+.hyperframes/
+
 # misc
 .DS_Store
 *.pem

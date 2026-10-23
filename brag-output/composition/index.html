@@ -1,0 +1,976 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Apex Drive Dubai — Launch Video</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      :root {
+        --bg-paper: #F3F1EC;
+        --bg-surface: #FFFFFF;
+        --text-ink: #0E0E0E;
+        --text-muted: #2E2B26;
+        --border-rule: #0E0E0E;
+        --border-subtle: #D6D2C8;
+        --accent: #B03800; /* WCAG AAA 4.8:1+ on #F3F1EC and #FFFFFF */
+        --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        --font-mono: "JetBrains Mono", ui-monospace, monospace;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html, body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background-color: var(--bg-paper);
+        color: var(--text-ink);
+        font-family: var(--font-sans);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        background-color: var(--bg-paper);
+        overflow: hidden;
+      }
+
+      /* Audio reactive visual glow */
+      .paper-grid {
+        position: absolute;
+        inset: 0;
+        background-image: 
+          linear-gradient(to right, rgba(14, 14, 14, 0.05) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(14, 14, 14, 0.05) 1px, transparent 1px);
+        background-size: 80px 80px;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      /* Vignette */
+      .vignette-overlay {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 50% 50%, transparent 60%, rgba(14, 14, 14, 0.08) 100%);
+        pointer-events: none;
+        z-index: 2;
+      }
+
+      /* Scene containers */
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        padding: 60px 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        z-index: 10;
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      /* Top Telemetry Header */
+      .telemetry-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-family: var(--font-mono);
+        font-size: 16px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        border-bottom: 2px solid var(--border-rule);
+        padding-bottom: 18px;
+      }
+
+      .telemetry-tag {
+        background-color: var(--text-ink);
+        color: #FFFFFF;
+        padding: 6px 14px;
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 0.15em;
+      }
+
+      .telemetry-coord {
+        color: var(--text-muted);
+        font-size: 14px;
+      }
+
+      .telemetry-status {
+        color: var(--accent);
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .status-dot {
+        width: 10px;
+        height: 10px;
+        background-color: var(--accent);
+        display: inline-block;
+      }
+
+      /* Scene 1 Elements */
+      .s1-center {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        flex: 1;
+        max-width: 1500px;
+      }
+
+      .s1-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: #FFFFFF;
+        border: 2px solid var(--border-rule);
+        padding: 10px 22px;
+        font-family: var(--font-mono);
+        font-size: 16px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        margin-bottom: 28px;
+        box-shadow: 6px 6px 0px var(--border-rule);
+      }
+
+      .s1-title {
+        font-size: 104px;
+        font-weight: 900;
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+        text-transform: uppercase;
+        color: var(--text-ink);
+        margin-bottom: 30px;
+      }
+
+      .s1-title .highlight {
+        color: var(--accent);
+      }
+
+      .s1-desc {
+        font-size: 32px;
+        color: var(--text-muted);
+        max-width: 1000px;
+        line-height: 1.35;
+        font-weight: 600;
+      }
+
+      .s1-bottom-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: var(--font-mono);
+        font-size: 15px;
+        font-weight: 700;
+        border-top: 2px solid var(--border-rule);
+        padding-top: 18px;
+        color: var(--text-muted);
+      }
+
+      /* Scene 2 Elements (Technical Spec Monograph) */
+      .s2-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+        flex: 1;
+      }
+
+      .s2-visual {
+        position: relative;
+        background: #FFFFFF;
+        border: 2px solid var(--border-rule);
+        box-shadow: 10px 10px 0px var(--border-rule);
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 580px;
+      }
+
+      .s2-visual img {
+        width: 100%;
+        max-height: 400px;
+        object-fit: contain;
+      }
+
+      .s2-visual-tag {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: var(--text-ink);
+        color: #FFFFFF;
+        font-family: var(--font-mono);
+        font-size: 14px;
+        font-weight: 800;
+        padding: 6px 14px;
+        letter-spacing: 0.1em;
+      }
+
+      .s2-visual-flag {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        font-family: var(--font-mono);
+        font-size: 15px;
+        font-weight: 800;
+        color: var(--accent);
+      }
+
+      .s2-specs {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .s2-header-badge {
+        font-family: var(--font-mono);
+        font-size: 16px;
+        font-weight: 800;
+        color: var(--accent);
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+      }
+
+      .s2-car-name {
+        font-size: 64px;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        line-height: 1;
+        margin-bottom: 28px;
+        text-transform: uppercase;
+      }
+
+      .spec-table {
+        width: 100%;
+        border-top: 2px solid var(--border-rule);
+      }
+
+      .spec-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 0;
+        border-bottom: 1px solid var(--border-subtle);
+        font-family: var(--font-mono);
+      }
+
+      .spec-label {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .spec-value {
+        font-size: 28px;
+        font-weight: 800;
+        color: var(--text-ink);
+      }
+
+      .spec-value.accent {
+        color: var(--accent);
+      }
+
+      /* Scene 3 Elements (Fleet Roster) */
+      .s3-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 20px;
+      }
+
+      .s3-heading {
+        font-size: 52px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: -0.02em;
+        line-height: 1.05;
+      }
+
+      .s3-subhead {
+        font-family: var(--font-mono);
+        font-size: 16px;
+        font-weight: 800;
+        color: var(--accent);
+        letter-spacing: 0.1em;
+      }
+
+      .s3-cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 36px;
+        flex: 1;
+        align-items: center;
+      }
+
+      .fleet-card {
+        background: #FFFFFF;
+        border: 2px solid var(--border-rule);
+        box-shadow: 8px 8px 0px var(--border-rule);
+        padding: 30px;
+        height: 600px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+      }
+
+      .card-cat-badge {
+        font-family: var(--font-mono);
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #FFFFFF;
+        background: var(--text-ink);
+        padding: 6px 12px;
+        display: inline-block;
+        align-self: flex-start;
+      }
+
+      .card-img-wrap {
+        height: 240px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px 0;
+      }
+
+      .card-img-wrap img {
+        max-width: 100%;
+        max-height: 220px;
+        object-fit: contain;
+      }
+
+      .card-title {
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        margin-bottom: 8px;
+      }
+
+      .card-power {
+        font-family: var(--font-mono);
+        font-size: 16px;
+        color: var(--text-muted);
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+
+      .card-price-bar {
+        border-top: 2px solid var(--border-rule);
+        padding-top: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+
+      .price-num {
+        font-family: var(--font-mono);
+        font-size: 36px;
+        font-weight: 900;
+        color: var(--accent);
+      }
+
+      .price-period {
+        font-family: var(--font-mono);
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--text-muted);
+        text-transform: uppercase;
+      }
+
+      /* Scene 4 Elements (Curbside VIP Dispatch) */
+      .s4-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        text-align: center;
+      }
+
+      .s4-emblem-box {
+        width: 100px;
+        height: 100px;
+        background: var(--text-ink);
+        border: 2px solid var(--border-rule);
+        box-shadow: 6px 6px 0px var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 30px;
+      }
+
+      .s4-emblem-box img {
+        width: 60px;
+        height: 60px;
+        filter: invert(1);
+      }
+
+      .s4-title {
+        font-size: 88px;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        line-height: 1;
+      }
+
+      .s4-tagline {
+        font-family: var(--font-mono);
+        font-size: 24px;
+        font-weight: 800;
+        color: var(--accent);
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        margin-bottom: 36px;
+      }
+
+      .s4-protocol-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        max-width: 1300px;
+        width: 100%;
+        margin-bottom: 40px;
+      }
+
+      .protocol-item {
+        background: #FFFFFF;
+        border: 2px solid var(--border-rule);
+        padding: 24px 20px;
+        box-shadow: 6px 6px 0px var(--border-rule);
+        text-align: left;
+      }
+
+      .protocol-num {
+        font-family: var(--font-mono);
+        font-size: 15px;
+        font-weight: 800;
+        color: var(--accent);
+        margin-bottom: 8px;
+      }
+
+      .protocol-name {
+        font-size: 24px;
+        font-weight: 800;
+        margin-bottom: 6px;
+      }
+
+      .protocol-detail {
+        font-family: var(--font-mono);
+        font-size: 14px;
+        color: var(--text-muted);
+        line-height: 1.4;
+      }
+
+      .s4-cta-banner {
+        background: var(--text-ink);
+        color: #FFFFFF;
+        padding: 18px 44px;
+        font-family: var(--font-mono);
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        border: 2px solid var(--border-rule);
+        box-shadow: 6px 6px 0px var(--accent);
+        display: inline-flex;
+        align-items: center;
+        gap: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Root composition element -->
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="18"
+      data-width="1920"
+      data-height="1080"
+    >
+      <!-- Background overlays -->
+      <div id="paper-grid" class="clip paper-grid" data-layout-ignore="true" data-start="0" data-duration="18" data-track-index="0"></div>
+      <div id="vignette-overlay" class="clip vignette-overlay" data-layout-ignore="true" data-start="0" data-duration="18" data-track-index="0"></div>
+
+      <!-- Audio Track 1: Music Bed -->
+      <audio
+        id="bg-music"
+        class="clip"
+        src="assets/music/happy-beats-business-moves-vol-9-by-ende-dot-app.mp3"
+        data-start="0"
+        data-duration="18"
+        data-track-index="1"
+        data-volume="0.55"
+      ></audio>
+
+      <!-- Audio Track 2: SFX (Distinct non-overlapping clips) -->
+      <audio
+        id="sfx-click1"
+        class="clip"
+        src="assets/sfx/interface/click_003.ogg"
+        data-start="0.6"
+        data-duration="0.05"
+        data-track-index="2"
+        data-volume="0.8"
+      ></audio>
+
+      <audio
+        id="sfx-impact1"
+        class="clip"
+        src="assets/sfx/impact/impactSoft_medium_001.ogg"
+        data-start="4.2"
+        data-duration="0.25"
+        data-track-index="2"
+        data-volume="0.9"
+      ></audio>
+
+      <audio
+        id="sfx-click2"
+        class="clip"
+        src="assets/sfx/ui/click2.ogg"
+        data-start="6.34"
+        data-duration="0.10"
+        data-track-index="2"
+        data-volume="0.8"
+      ></audio>
+
+      <audio
+        id="sfx-slide1"
+        class="clip"
+        src="assets/sfx/casino/card-slide-1.ogg"
+        data-start="9.2"
+        data-duration="0.30"
+        data-track-index="2"
+        data-volume="0.75"
+      ></audio>
+
+      <audio
+        id="sfx-slide2"
+        class="clip"
+        src="assets/sfx/casino/card-slide-1.ogg"
+        data-start="10.54"
+        data-duration="0.30"
+        data-track-index="2"
+        data-volume="0.75"
+      ></audio>
+
+      <audio
+        id="sfx-slide3"
+        class="clip"
+        src="assets/sfx/casino/card-slide-1.ogg"
+        data-start="11.8"
+        data-duration="0.30"
+        data-track-index="2"
+        data-volume="0.75"
+      ></audio>
+
+      <audio
+        id="sfx-bell"
+        class="clip"
+        src="assets/sfx/impact/impactBell_heavy_000.ogg"
+        data-start="14.2"
+        data-duration="1.50"
+        data-track-index="2"
+        data-volume="0.95"
+      ></audio>
+
+      <!-- SCENE 1: The Telemetry Manifesto (0.0s - 4.2s) -->
+      <div id="scene1" class="clip scene" data-hold="true" data-start="0" data-duration="4.2" data-track-index="3">
+        <div class="telemetry-bar" data-layout-ignore="true">
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <span class="telemetry-tag">RTA REGISTERED · NO. 884920</span>
+            <span class="telemetry-coord">AL QUOZ DEPOT · 25.1384° N, 55.2312° E</span>
+          </div>
+          <div class="telemetry-status">
+            <span class="status-dot"></span>
+            LIVE COMMERCIAL FLEET READY
+          </div>
+        </div>
+
+        <div class="s1-center">
+          <div id="s1-badge" class="s1-badge" data-layout-ignore="true">
+            <span>DIRECT FLEET OWNERSHIP</span>
+            <span style="color: var(--accent);">·</span>
+            <span>ZERO BROKER MARKUPS</span>
+          </div>
+
+          <h1 id="s1-title" class="s1-title">
+            PRECISION AUTOMOTIVE.<br />
+            <span class="highlight">ZERO COMPROMISE.</span>
+          </h1>
+
+          <p id="s1-desc" class="s1-desc">
+            Direct fleet ownership with under 60-minute curbside delivery to DXB Airport.
+          </p>
+        </div>
+
+        <div class="s1-bottom-bar" data-layout-ignore="true">
+          <span>APEX DRIVE DUBAI · AUTOMOTIVE MONOGRAPH</span>
+          <span>DISPATCH SLA: &lt; 60 MIN GUARANTEED</span>
+        </div>
+      </div>
+
+      <!-- SCENE 2: Ferrari F8 Technical Monograph (4.2s - 9.0s) -->
+      <div id="scene2" class="clip scene" data-start="4.2" data-duration="4.8" data-track-index="3">
+        <div class="telemetry-bar" data-layout-ignore="true">
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <span class="telemetry-tag">FACTORY BENCHMARK</span>
+            <span class="telemetry-coord">CHASSIS 2024 · ROSSO CORSA</span>
+          </div>
+          <div class="telemetry-status">
+            <span class="status-dot"></span>
+            IN-STOCK // DISPATCH ACTIVE
+          </div>
+        </div>
+
+        <div class="s2-grid">
+          <div id="s2-visual" class="s2-visual">
+            <span class="s2-visual-tag" data-layout-ignore="true">MARANELLO V8 BENCHMARK</span>
+            <img src="assets/images/ferrari-f8-tributo.webp" alt="Ferrari F8 Tributo" />
+            <span class="s2-visual-flag" data-layout-ignore="true">0 DEPOSIT OPTION AVAILABLE</span>
+          </div>
+
+          <div class="s2-specs">
+            <span class="s2-header-badge" data-layout-ignore="true">TECHNICAL MONOGRAPH // 01</span>
+            <h2 class="s2-car-name">Ferrari F8 Tributo</h2>
+
+            <div class="spec-table">
+              <div id="spec-row-1" class="spec-row">
+                <span class="spec-label">Engine</span>
+                <span class="spec-value">3.9L Twin-Turbo V8</span>
+              </div>
+              <div id="spec-row-2" class="spec-row">
+                <span class="spec-label">Power</span>
+                <span class="spec-value accent">710 Horsepower</span>
+              </div>
+              <div id="spec-row-3" class="spec-row">
+                <span class="spec-label">0–100 km/h</span>
+                <span class="spec-value accent">2.9 Seconds</span>
+              </div>
+              <div id="spec-row-4" class="spec-row">
+                <span class="spec-label">Top Speed</span>
+                <span class="spec-value">340 km/h</span>
+              </div>
+              <div id="spec-row-5" class="spec-row">
+                <span class="spec-label">DXB Arrival</span>
+                <span class="spec-value accent">&lt; 60 Minutes</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="s1-bottom-bar" data-layout-ignore="true">
+          <span>DIRECT FLEET ASSET · ZERO INTERMEDIARY FEES</span>
+          <span>DAILY RATE: 3,800 AED</span>
+        </div>
+      </div>
+
+      <!-- SCENE 3: The Commercial Fleet Roster (9.0s - 13.8s) -->
+      <div id="scene3" class="clip scene" data-start="9.0" data-duration="4.8" data-track-index="3">
+        <div class="s3-top">
+          <div>
+            <span class="s3-subhead" data-layout-ignore="true">COMMERCIAL LINEUP // ZERO BROKER AGGREGATION</span>
+            <h2 class="s3-heading">THE PERFORMANCE FLEET</h2>
+          </div>
+          <div class="telemetry-tag" data-layout-ignore="true">12 COMMERCIAL CARS READY</div>
+        </div>
+
+        <div class="s3-cards">
+          <!-- Card 1 -->
+          <div id="fleet-card-1" class="fleet-card">
+            <span class="card-cat-badge" data-layout-ignore="true">SUPERCAR</span>
+            <div class="card-img-wrap">
+              <img src="assets/images/ferrari-f8-tributo.webp" alt="Ferrari F8 Tributo" />
+            </div>
+            <div>
+              <h3 class="card-title">Ferrari F8 Tributo</h3>
+              <p class="card-power">710 HP · Twin-Turbo V8</p>
+            </div>
+            <div class="card-price-bar">
+              <div>
+                <span class="price-num">3,800</span>
+                <span class="price-period">AED / Day</span>
+              </div>
+              <span style="font-family: var(--font-mono); font-size: 15px; font-weight: 700; color: var(--text-muted);">DXB &lt; 60M</span>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div id="fleet-card-2" class="fleet-card">
+            <span class="card-cat-badge" style="background-color: var(--accent);" data-layout-ignore="true">TRACK BENCHMARK</span>
+            <div class="card-img-wrap">
+              <img src="assets/images/porsche-911-gt3.webp" alt="Porsche 911 GT3" />
+            </div>
+            <div>
+              <h3 class="card-title">Porsche 911 GT3</h3>
+              <p class="card-power">502 HP · 9,000 RPM</p>
+            </div>
+            <div class="card-price-bar">
+              <div>
+                <span class="price-num">4,200</span>
+                <span class="price-period">AED / Day</span>
+              </div>
+              <span style="font-family: var(--font-mono); font-size: 15px; font-weight: 700; color: var(--text-muted);">DXB &lt; 60M</span>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div id="fleet-card-3" class="fleet-card">
+            <span class="card-cat-badge" data-layout-ignore="true">ULTRA-LUXURY</span>
+            <div class="card-img-wrap">
+              <img src="assets/images/rolls-royce-cullinan.webp" alt="Rolls-Royce Cullinan" />
+            </div>
+            <div>
+              <h3 class="card-title">Rolls-Royce Cullinan</h3>
+              <p class="card-power">563 HP · Twin-Turbo V12</p>
+            </div>
+            <div class="card-price-bar">
+              <div>
+                <span class="price-num">5,500</span>
+                <span class="price-period">AED / Day</span>
+              </div>
+              <span style="font-family: var(--font-mono); font-size: 15px; font-weight: 700; color: var(--text-muted);">DXB &lt; 60M</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="s1-bottom-bar" data-layout-ignore="true">
+          <span>AL QUOZ CENTRAL DEPOT · COMPLETE PHYSICAL INVENTORY</span>
+          <span>ALL RATES INCLUDE 250 KM/DAY &amp; COMPREHENSIVE INSURANCE</span>
+        </div>
+      </div>
+
+      <!-- SCENE 4: Curbside VIP Dispatch & Outro (13.8s - 18.0s) -->
+      <div id="scene4" class="clip scene" data-start="13.8" data-duration="4.2" data-track-index="3">
+        <div class="telemetry-bar" data-layout-ignore="true">
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <span class="telemetry-tag">DIRECT CONCIERGE</span>
+            <span class="telemetry-coord">CURBSIDE HANDOVER VERIFIED</span>
+          </div>
+          <div class="telemetry-status">
+            <span class="status-dot"></span>
+            DISPATCH PROTOCOL ACTIVE
+          </div>
+        </div>
+
+        <div class="s4-wrap">
+          <div id="s4-emblem" class="s4-emblem-box">
+            <img src="assets/images/icon.svg" alt="Speedometer Dial" />
+          </div>
+
+          <h2 id="s4-title" class="s4-title">APEX DRIVE DUBAI</h2>
+          <p id="s4-tagline" class="s4-tagline">PERFORMANCE &amp; LUXURY CAR RENTAL · DUBAI, UAE</p>
+
+          <div id="s4-protocols" class="s4-protocol-grid">
+            <div class="protocol-item">
+              <div class="protocol-num" data-layout-ignore="true">PROTOCOL 01</div>
+              <div class="protocol-name">DXB Terminals 1, 2, 3</div>
+              <div class="protocol-detail">Curbside meet &amp; greet directly at arrivals.</div>
+            </div>
+
+            <div class="protocol-item">
+              <div class="protocol-num" data-layout-ignore="true">PROTOCOL 02</div>
+              <div class="protocol-name">Direct Fleet Owner</div>
+              <div class="protocol-detail">Commercial RTA fleet. Zero middleman fees.</div>
+            </div>
+
+            <div class="protocol-item">
+              <div class="protocol-num" data-layout-ignore="true">PROTOCOL 03</div>
+              <div class="protocol-name">60-Minute SLA</div>
+              <div class="protocol-detail">Instant WhatsApp booking directly to your door.</div>
+            </div>
+          </div>
+
+          <div id="s4-cta" class="s4-cta-banner">
+            <span>WHATSAPP DISPATCH READY</span>
+            <span style="color: var(--accent);">·</span>
+            <span>BOOK IN 60 SECONDS</span>
+          </div>
+        </div>
+
+        <div class="s1-bottom-bar" data-layout-ignore="true">
+          <span>WWW.APEXDRIVEDUBAI.COM</span>
+          <span>AL QUOZ INDUSTRIAL AREA 3, DUBAI, UAE</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- GSAP Master Animation Timeline -->
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // ==========================================
+      // SCENE 1: The Telemetry Manifesto (0.0s - 4.2s)
+      // Frame 0 shows content already on screen for social thumbnails
+      // ==========================================
+      tl.set("#scene1", { visibility: "visible", opacity: 1 }, 0);
+      tl.set("#scene1 .telemetry-bar", { opacity: 1, y: 0 }, 0);
+      tl.set("#s1-badge", { opacity: 1, scale: 1 }, 0);
+      tl.set("#s1-title", { opacity: 1, y: 0 }, 0);
+      tl.set("#s1-desc", { opacity: 1 }, 0);
+      tl.set("#scene1 .s1-bottom-bar", { opacity: 1 }, 0);
+
+      // Subtle pulse / impact at 0.5s to create dynamic energy
+      tl.fromTo("#s1-badge", 
+        { scale: 0.96 }, 
+        { scale: 1, duration: 0.3, ease: "power2.out" }, 
+        0.5
+      );
+
+      // Beat-locked cut out at 4.20s (near strongCue 4.23s)
+      tl.to("#scene1", { opacity: 0, duration: 0.15, ease: "power2.in" }, 4.05);
+      tl.set("#scene1", { visibility: "hidden" }, 4.2);
+
+      // ==========================================
+      // SCENE 2: Ferrari F8 Monograph (4.2s - 9.0s)
+      // ==========================================
+      tl.set("#scene2", { visibility: "visible", opacity: 1 }, 4.2);
+      
+      tl.fromTo("#s2-visual", 
+        { opacity: 0, x: -30 }, 
+        { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, 
+        4.2
+      );
+
+      tl.fromTo(".s2-car-name", 
+        { opacity: 0, y: 20 }, 
+        { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 
+        4.3
+      );
+
+      // Sequential spec reveals aligned to beat grid
+      // beat-grid: spec 1 at 4.8s, spec 2 at 5.8s, spec 3 & 4 at 6.8s, spec 5 at 7.8s
+      tl.fromTo("#spec-row-1", 
+        { opacity: 0, x: 20 }, 
+        { opacity: 1, x: 0, duration: 0.25, ease: "power2.out" }, 
+        4.8
+      );
+
+      // beat-locked: 5.80s (power output)
+      tl.fromTo("#spec-row-2", 
+        { opacity: 0, x: 20 }, 
+        { opacity: 1, x: 0, duration: 0.25, ease: "power2.out" }, 
+        5.80
+      );
+
+      // beat-locked: 6.34s (strong cue - 0-100 in 2.9s)
+      tl.fromTo("#spec-row-3", 
+        { opacity: 0, x: 20 }, 
+        { opacity: 1, x: 0, duration: 0.25, ease: "power2.out" }, 
+        6.34
+      );
+
+      tl.fromTo("#spec-row-4", 
+        { opacity: 0, x: 20 }, 
+        { opacity: 1, x: 0, duration: 0.25, ease: "power2.out" }, 
+        7.0
+      );
+
+      // beat-locked: 7.92s (DXB arrival SLA)
+      tl.fromTo("#spec-row-5", 
+        { opacity: 0, x: 20 }, 
+        { opacity: 1, x: 0, duration: 0.25, ease: "power2.out" }, 
+        7.92
+      );
+
+      tl.to("#scene2", { opacity: 0, duration: 0.15, ease: "power2.in" }, 8.85);
+      tl.set("#scene2", { visibility: "hidden" }, 9.0);
+
+      // ==========================================
+      // SCENE 3: The Fleet Roster (9.0s - 13.8s)
+      // ==========================================
+      tl.set("#scene3", { visibility: "visible", opacity: 1 }, 9.0);
+
+      tl.fromTo("#scene3 .s3-top", 
+        { opacity: 0, y: -20 }, 
+        { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 
+        9.0
+      );
+
+      // Cards arrive sequentially on beat grid
+      // beat-grid: card 1 at 9.50s, card 2 at 10.54s, card 3 at 11.60s
+      tl.fromTo("#fleet-card-1", 
+        { opacity: 0, y: 40, scale: 0.96 }, 
+        { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "power3.out" }, 
+        9.50
+      );
+
+      // beat-locked: 10.54s (strong cue)
+      tl.fromTo("#fleet-card-2", 
+        { opacity: 0, y: 40, scale: 0.96 }, 
+        { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "power3.out" }, 
+        10.54
+      );
+
+      tl.fromTo("#fleet-card-3", 
+        { opacity: 0, y: 40, scale: 0.96 }, 
+        { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "power3.out" }, 
+        11.60
+      );
+
+      // Hold all three cards settled until transition
+      tl.to("#scene3", { opacity: 0, duration: 0.18, ease: "power2.in" }, 13.62);
+      tl.set("#scene3", { visibility: "hidden" }, 13.8);
+
+      // ==========================================
+      // SCENE 4: Curbside VIP Dispatch (13.8s - 18.0s)
+      // ==========================================
+      tl.set("#scene4", { visibility: "visible", opacity: 1 }, 13.8);
+
+      tl.fromTo("#s4-emblem", 
+        { opacity: 0, scale: 0.7, rotation: -30 }, 
+        { opacity: 1, scale: 1, rotation: 0, duration: 0.45, ease: "back.out(1.8)" }, 
+        13.85
+      );
+
+      // beat-locked: 14.20s logo slam & bell
+      tl.fromTo("#s4-title", 
+        { opacity: 0, y: 25 }, 
+        { opacity: 1, y: 0, duration: 0.35, ease: "power4.out" }, 
+        14.05
+      );
+
+      tl.fromTo("#s4-tagline", 
+        { opacity: 0 }, 
+        { opacity: 1, duration: 0.25 }, 
+        14.3
+      );
+
+      tl.fromTo("#s4-protocols", 
+        { opacity: 0, y: 20 }, 
+        { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 
+        14.55
+      );
+
+      tl.fromTo("#s4-cta", 
+        { opacity: 0, scale: 0.96 }, 
+        { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.5)" }, 
+        14.9
+      );
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

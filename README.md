@@ -2,6 +2,20 @@
 
 > **High-converting, automotive editorial static Next.js master website template for UAE & GCC luxury car rental companies.**
 
+---
+
+## Launch Showcase Video
+
+<video src="brag-output/brag.mp4" poster="brag-output/brag.jpg" controls="controls" width="100%">
+  <a href="brag-output/brag.mp4">
+    <img src="brag-output/brag.jpg" alt="Apex Drive Dubai Launch Video" width="100%" />
+  </a>
+</video>
+
+> 🎬 **[Watch Full Video (`brag-output/brag.mp4`)](brag-output/brag.mp4)** — 18-second automotive editorial overview with audio, factory telemetry (Ferrari F8 710 HP, 0-100 in 2.9s), direct fleet ownership, and under-60-minute DXB curbside dispatch.
+
+---
+
 ![Apex Drive Dubai Desktop Preview](screenshots/home-desktop-1920.png)
 
 ---
